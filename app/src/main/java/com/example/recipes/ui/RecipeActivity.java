@@ -1,5 +1,6 @@
 package com.example.recipes.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipes.R;
+import com.example.recipes.data.local.SharedPreferencesFavorites;
 import com.example.recipes.data.model.Recipe;
 import com.example.recipes.data.model.RecipeStore;
 
@@ -20,12 +22,12 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
-        TextView titleTV = findViewById(R.id.title);
+        final TextView titleTV = findViewById(R.id.title);
         TextView descriptionTV = findViewById(R.id.description);
 
         RecipeStore recipeStore = new RecipeStore(this, "recipes");
         String id = getIntent().getStringExtra(KEY_ID);
-        Recipe recipe = recipeStore.getRecipe(id);
+        final Recipe recipe = recipeStore.getRecipe(id);
 
         if (recipe == null) {
             titleTV.setVisibility(View.GONE);
@@ -33,8 +35,20 @@ public class RecipeActivity extends AppCompatActivity {
             return;
         }
 
+        final SharedPreferencesFavorites sharedPreferences = new SharedPreferencesFavorites(this);
+        final boolean favorite = sharedPreferences.get(recipe.id);
+
         titleTV.setText(recipe.title);
         descriptionTV.setText(recipe.description);
+        titleTV.setSelected(favorite);
+
+        titleTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean result = sharedPreferences.toggle(recipe.id);
+                titleTV.setSelected(result);
+            }
+        });
 
     }
 }
