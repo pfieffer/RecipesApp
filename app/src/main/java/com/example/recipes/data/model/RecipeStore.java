@@ -7,10 +7,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecipeStore {
     public final List<Recipe> recipes = new ArrayList<>();
+    private final Map<String, Recipe> map = new HashMap<>();
 
     //RecipeStore parses a list of recipes from our assets directory
     public RecipeStore(Context context,String directory){
@@ -21,6 +24,7 @@ public class RecipeStore {
 
             if (recipe!=null){
                 recipes.add(recipe);
+                map.put(recipe.id, recipe);
             }
         }
     }
@@ -54,5 +58,9 @@ public class RecipeStore {
         } catch (IOException e) {
             return new String[0];
         }
+    }
+
+    public Recipe getRecipe(String id) {
+        return map.get(id);
     }
 }

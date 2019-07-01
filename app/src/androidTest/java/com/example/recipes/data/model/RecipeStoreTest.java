@@ -27,4 +27,15 @@ public class RecipeStoreTest {
         assertNotNull(store.recipes);
         assertEquals(4, store.recipes.size());
     }
+
+    @Test
+    public void getChocolatePudding() {
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        RecipeStore store = new RecipeStore(context, "recipes"); //folder name
+        Recipe recipe = store.getRecipe("chocolate_pudding");
+        assertNotNull(recipe);
+        assertEquals("chocolate_pudding", recipe.id);
+        assertEquals("Chocolate Pudding", recipe.title);
+        //can do the same for Description
+    }
 }
