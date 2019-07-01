@@ -1,5 +1,7 @@
 package com.example.recipes.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +29,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecipeViewHolder holder, int position) {
         final Recipe recipe = store.recipes.get(position);
 
         holder.textView.setText(recipe.title);
+
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = holder.textView.getContext();
+                Intent intent = new Intent(context, RecipeActivity.class);
+                intent.putExtra(RecipeActivity.KEY_ID, recipe.id);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
