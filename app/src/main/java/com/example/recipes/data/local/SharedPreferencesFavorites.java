@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SharedPreferencesFavorites {
+public class SharedPreferencesFavorites implements Favorites{
     private final SharedPreferences preferences;
 
     public SharedPreferencesFavorites(Context context) {
