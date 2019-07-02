@@ -8,6 +8,7 @@ import androidx.test.rule.ActivityTestRule;
 import com.example.recipes.R;
 import com.example.recipes.data.local.InMemoryFavorites;
 import com.example.recipes.injection.TestRecipeApplication;
+import com.example.recipes.test.RecipeRobot;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -40,13 +41,10 @@ public class RecipeActivityTest {
 
     @Test
     public void recipeNotFound() {
-        activityTestRule.launchActivity(null);
-
-        onView(withId(R.id.description))
-                .check(matches(withText(R.string.recipe_not_found)));
-
-        onView(withId(R.id.title))
-                .check(matches(not(isDisplayed())));
+        new RecipeRobot()
+                .launch(activityTestRule)
+                .noTitle()
+                .description(R.string.recipe_not_found);
     }
 
     @Test
