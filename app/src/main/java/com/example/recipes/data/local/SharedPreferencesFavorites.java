@@ -3,8 +3,6 @@ package com.example.recipes.data.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class SharedPreferencesFavorites implements Favorites{
     private final SharedPreferences preferences;
 

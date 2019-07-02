@@ -1,6 +1,5 @@
 package com.example.recipes.ui;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipes.R;
-import com.example.recipes.data.local.SharedPreferencesFavorites;
+import com.example.recipes.data.local.Favorites;
 import com.example.recipes.data.model.Recipe;
 import com.example.recipes.data.model.RecipeStore;
 import com.example.recipes.injection.RecipeApplication;
@@ -37,8 +36,8 @@ public class RecipeActivity extends AppCompatActivity {
         }
 
         RecipeApplication recipeApplication = (RecipeApplication) getApplication();
-        final SharedPreferencesFavorites sharedPreferences = (SharedPreferencesFavorites) recipeApplication.getFavorites();
-        final boolean favorite = sharedPreferences.get(recipe.id);
+        final Favorites favorites = recipeApplication.getFavorites();
+        boolean favorite = favorites.get(recipe.id);
 
         titleTV.setText(recipe.title);
         descriptionTV.setText(recipe.description);
@@ -47,7 +46,7 @@ public class RecipeActivity extends AppCompatActivity {
         titleTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean result = sharedPreferences.toggle(recipe.id);
+                boolean result = favorites.toggle(recipe.id);
                 titleTV.setSelected(result);
             }
         });
