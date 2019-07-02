@@ -12,6 +12,7 @@ import com.example.recipes.R;
 import com.example.recipes.data.local.SharedPreferencesFavorites;
 import com.example.recipes.data.model.Recipe;
 import com.example.recipes.data.model.RecipeStore;
+import com.example.recipes.injection.RecipeApplication;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -35,7 +36,8 @@ public class RecipeActivity extends AppCompatActivity {
             return;
         }
 
-        final SharedPreferencesFavorites sharedPreferences = new SharedPreferencesFavorites(this);
+        RecipeApplication recipeApplication = (RecipeApplication) getApplication();
+        final SharedPreferencesFavorites sharedPreferences = (SharedPreferencesFavorites) recipeApplication.getFavorites();
         final boolean favorite = sharedPreferences.get(recipe.id);
 
         titleTV.setText(recipe.title);

@@ -4,6 +4,7 @@
     package="com.example.recipes">
 
     <application
+        android:name=".injection.RecipeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
