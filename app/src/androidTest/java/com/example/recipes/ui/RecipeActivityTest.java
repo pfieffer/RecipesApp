@@ -1,7 +1,5 @@
 package com.example.recipes.ui;
 
-import android.content.Intent;
-
 import androidx.test.rule.ActivityTestRule;
 
 import com.example.recipes.R;
@@ -31,9 +29,8 @@ public class RecipeActivityTest {
         new RecipeRobot()
                 .launch(activityTestRule, CARROTS_ID)
                 .title(CARROTS_TITLE) //check if the view has the string
-                .checkIsNotSelected() //see if title's star is not selected
                 .performClick(R.id.title) //perform a click
-                .checkIsSelected(R.id.title); //see if title's star is selected
+                .isFavorite();
     }
 
     @Test
@@ -41,11 +38,5 @@ public class RecipeActivityTest {
         new RecipeRobot().setFavorite(CARROTS_ID)
                 .launch(activityTestRule, CARROTS_ID)
                 .isFavorite();
-    }
-
-    private void launchRecipe(String id) {
-        Intent intent = new Intent();
-        intent.putExtra(RecipeActivity.KEY_ID, id);
-        activityTestRule.launchActivity(intent);
     }
 }
