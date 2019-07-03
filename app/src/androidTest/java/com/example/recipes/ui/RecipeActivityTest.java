@@ -2,22 +2,17 @@ package com.example.recipes.ui;
 
 import android.content.Intent;
 
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.example.recipes.R;
-import com.example.recipes.data.local.InMemoryFavorites;
-import com.example.recipes.injection.TestRecipeApplication;
 import com.example.recipes.test.RecipeRobot;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isSelected;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -29,15 +24,6 @@ public class RecipeActivityTest {
     @Rule
     public ActivityTestRule<RecipeActivity> activityTestRule =
             new ActivityTestRule<>(RecipeActivity.class, true, false);
-
-    private InMemoryFavorites favorites;
-
-    @Before
-    public void clearFavorites() {
-        TestRecipeApplication app = (TestRecipeApplication) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
-        favorites = (InMemoryFavorites) app.getFavorites();
-        favorites.clear();
-    }
 
     @Test
     public void recipeNotFound() {
@@ -59,13 +45,10 @@ public class RecipeActivityTest {
     }
 
     @Test
-    public void alreadyFavorite(){
-        favorites.put(CARROTS_ID, true);
-
-        launchRecipe(CARROTS_ID);
-
-        onView(withId(R.id.title))
-                .check(matches(isSelected()));
+    public void alreadyFavorite() {
+        new RecipeRobot().setFavorite(CARROTS_ID)
+                .launch(activityTestRule, CARROTS_ID)
+                .isFavorite();
     }
 
     private void launchRecipe(String id) {
