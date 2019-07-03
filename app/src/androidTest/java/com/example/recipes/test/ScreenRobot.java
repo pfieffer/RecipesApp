@@ -45,15 +45,6 @@ public abstract class ScreenRobot<T extends ScreenRobot> {
         return (T) this;
     }
 
-    public T checkIsNotSelected(@IdRes int... viewIds) {
-        for (int viewId : viewIds) {
-            onView(withId(viewId))
-                    .check(matches(not(isSelected())));
-        }
-
-        return (T) this;
-    }
-
     public T performClick(@IdRes int... viewIds) {
         for (int viewId : viewIds) {
             onView(withId(viewId))
