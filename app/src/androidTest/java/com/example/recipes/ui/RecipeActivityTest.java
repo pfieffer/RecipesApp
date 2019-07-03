@@ -10,16 +10,9 @@ import com.example.recipes.test.RecipeRobot;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isSelected;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsNot.not;
-
 public class RecipeActivityTest {
     private static final String CARROTS_ID = "creamed_carrots";
+    private static final String CARROTS_TITLE = "Creamed Carrots";
 
     @Rule
     public ActivityTestRule<RecipeActivity> activityTestRule =
@@ -35,13 +28,12 @@ public class RecipeActivityTest {
 
     @Test
     public void clickToFavorite() {
-        launchRecipe(CARROTS_ID);
-
-        onView(withId(R.id.title))
-                .check(matches(withText("Creamed Carrots")))
-                .check(matches(not(isSelected()))) //see if title's star is not selected
-                .perform(click()) //perform a click
-                .check(matches(isSelected())); //see if title's star is selected
+        new RecipeRobot()
+                .launch(activityTestRule, CARROTS_ID)
+                .title(CARROTS_TITLE) //check if the view has the string
+                .checkIsNotSelected() //see if title's star is not selected
+                .performClick(R.id.title) //perform a click
+                .checkIsSelected(R.id.title); //see if title's star is selected
     }
 
     @Test

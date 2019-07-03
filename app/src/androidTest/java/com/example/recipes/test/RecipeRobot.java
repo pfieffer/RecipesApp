@@ -49,4 +49,8 @@ public class RecipeRobot extends ScreenRobot<RecipeRobot> {
     public RecipeRobot isFavorite() {
         return checkIsSelected(R.id.title);
     }
+
+    public RecipeRobot title(String title) {
+        return checkViewHasString(R.id.title, title);
+    }
 }
