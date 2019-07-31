@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipes.R;
 import com.example.recipes.data.model.Recipe;
 import com.example.recipes.data.model.RecipeStore;
+import com.example.recipes.ui.recipe.RecipeActivity;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
 
