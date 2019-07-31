@@ -9,7 +9,7 @@ import androidx.test.rule.ActivityTestRule;
 import com.example.recipes.R;
 import com.example.recipes.data.local.InMemoryFavorites;
 import com.example.recipes.injection.TestRecipeApplication;
-import com.example.recipes.ui.RecipeActivity;
+import com.example.recipes.ui.recipe.RecipeActivity;
 
 public class RecipeRobot extends ScreenRobot<RecipeRobot> {
 

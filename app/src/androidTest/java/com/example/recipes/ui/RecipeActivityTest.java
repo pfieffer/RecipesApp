@@ -4,6 +4,7 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.example.recipes.R;
 import com.example.recipes.test.RecipeRobot;
+import com.example.recipes.ui.recipe.RecipeActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
